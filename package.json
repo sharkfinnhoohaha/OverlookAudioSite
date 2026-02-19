@@ -5,15 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "edit": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"vite\"",
+    "build": "tinacms build && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tinacms": "^2.0.0"
   },
   "devDependencies": {
+    "@tinacms/cli": "^1.5.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.18",
     "postcss": "^8.4.35",

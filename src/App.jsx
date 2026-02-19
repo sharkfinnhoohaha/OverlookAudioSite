@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Menu, X, Activity, PlayCircle, Layers } from 'lucide-react';
+import { useTina } from "tinacms/dist/react";
 
 const InteractiveSoundwave = () => {
   const canvasRef = useRef(null);
@@ -108,8 +109,19 @@ const FadeIn = ({ children, delay = 0, className = '' }) => {
   );
 };
 
-export default function App() {
+export default function App(props) {
   const [navOpen, setNavOpen] = useState(false);
+
+  // --- TINA HOOK ---
+  // This connects your component to the TinaCMS sidebar
+  const { data } = useTina({
+    query: props.query,
+    variables: props.variables,
+    data: props.data,
+  });
+
+  // Shortcut to the CMS data
+  const page = data?.page || {};
 
   return (
     <div className="min-h-screen bg-black text-neutral-200 font-sans selection:bg-neutral-800 selection:text-white overflow-x-hidden">
@@ -123,6 +135,7 @@ export default function App() {
         </button>
       </nav>
 
+      {/* Nav Overlay */}
       <div className={`fixed inset-0 bg-neutral-900/95 backdrop-blur-xl z-40 transition-transform duration-700 ease-[0.16,1,0.3,1] ${navOpen ? 'translate-y-0' : '-translate-y-full'} flex items-center justify-center`}>
         <div className="flex flex-col text-center space-y-8 text-4xl md:text-6xl font-light tracking-tighter">
           <a href="#philosophy" onClick={() => setNavOpen(false)} className="hover:text-white text-neutral-400 transition-colors">Philosophy</a>
@@ -135,15 +148,29 @@ export default function App() {
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <InteractiveSoundwave />
         <div className="relative z-10 text-center px-4 mt-20 md:mt-0 pointer-events-none">
-          <FadeIn><h1 className="text-5xl md:text-8xl lg:text-9xl font-semibold tracking-tighter text-white mb-6">Architecting <br /> Sound.</h1></FadeIn>
-          <FadeIn delay={200}><p className="text-lg md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto tracking-tight">We engineer sonic environments and audio identities for modern brands. Precision meets perception.</p></FadeIn>
+          <FadeIn>
+            <h1 
+               className="text-5xl md:text-8xl lg:text-9xl font-semibold tracking-tighter text-white mb-6"
+               dangerouslySetInnerHTML={{ __html: page.heroHeadline || "Architecting <br /> Sound." }}
+            />
+          </FadeIn>
+          <FadeIn delay={200}>
+            <p className="text-lg md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto tracking-tight">
+              {page.heroSubheadline || "We engineer sonic environments and audio identities for modern brands. Precision meets perception."}
+            </p>
+          </FadeIn>
         </div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-neutral-500 animate-pulse text-xs tracking-widest uppercase pointer-events-none">Scroll to explore</div>
       </section>
 
       <section id="philosophy" className="py-32 px-6 md:px-12 lg:px-24 bg-black border-t border-neutral-900">
         <div className="max-w-5xl mx-auto">
-          <FadeIn><h2 className="text-3xl md:text-5xl lg:text-7xl font-light tracking-tighter leading-[1.1] text-white">Sound is the invisible architecture of an experience. <span className="text-neutral-600">We don't just make noise; we build structural audio that defines spaces and shapes emotion.</span></h2></FadeIn>
+          <FadeIn>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-light tracking-tighter leading-[1.1] text-white">
+              {page.philosophyMain || "Sound is the invisible architecture of an experience."} 
+              <span className="text-neutral-600"> {page.philosophyAccent || "We don't just make noise; we build structural audio that defines spaces and shapes emotion."}</span>
+            </h2>
+          </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-32">
             <FadeIn delay={100}><h3 className="text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-neutral-800 pb-4">The Approach</h3><p className="text-lg text-neutral-400 font-light leading-relaxed">We analyze the brand ecosystem before recording a single note. Our methodology is rooted in acoustic strategy, ensuring every frequency serves a distinct purpose.</p></FadeIn>
             <FadeIn delay={300}><h3 className="text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-neutral-800 pb-4">The Execution</h3><p className="text-lg text-neutral-400 font-light leading-relaxed">From high-fidelity spatial mixing to minimalist sonic logos, our production is obsessive. We strip away the unnecessary, leaving only the essential audio elements.</p></FadeIn>
@@ -151,6 +178,7 @@ export default function App() {
         </div>
       </section>
 
+      {/* Capabilities & Footer stay static for now */}
       <section id="capabilities" className="py-32 bg-black border-t border-neutral-900">
         <div className="px-6 md:px-12 lg:px-24 mb-16"><FadeIn><h2 className="text-4xl md:text-6xl tracking-tighter text-white font-medium">Capabilities</h2></FadeIn></div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-neutral-900 border-y border-neutral-900">
