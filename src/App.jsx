@@ -112,16 +112,19 @@ const FadeIn = ({ children, delay = 0, className = '' }) => {
 export default function App(props) {
   const [navOpen, setNavOpen] = useState(false);
 
-  // --- TINA HOOK ---
-  // This connects your component to the TinaCMS sidebar
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
     data: props.data,
   });
 
-  // Shortcut to the CMS data
   const page = data?.page || {};
+
+  // Helper to map icons to capability items
+  const getIcon = (index) => {
+    const icons = [<Activity size={32} strokeWidth={1} />, <Layers size={32} strokeWidth={1} />, <PlayCircle size={32} strokeWidth={1} />];
+    return icons[index % icons.length];
+  };
 
   return (
     <div className="min-h-screen bg-black text-neutral-200 font-sans selection:bg-neutral-800 selection:text-white overflow-x-hidden">
@@ -135,7 +138,6 @@ export default function App(props) {
         </button>
       </nav>
 
-      {/* Nav Overlay */}
       <div className={`fixed inset-0 bg-neutral-900/95 backdrop-blur-xl z-40 transition-transform duration-700 ease-[0.16,1,0.3,1] ${navOpen ? 'translate-y-0' : '-translate-y-full'} flex items-center justify-center`}>
         <div className="flex flex-col text-center space-y-8 text-4xl md:text-6xl font-light tracking-tighter">
           <a href="#philosophy" onClick={() => setNavOpen(false)} className="hover:text-white text-neutral-400 transition-colors">Philosophy</a>
@@ -156,7 +158,7 @@ export default function App(props) {
           </FadeIn>
           <FadeIn delay={200}>
             <p className="text-lg md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto tracking-tight">
-              {page.heroSubheadline || "We engineer sonic environments and audio identities for modern brands. Precision meets perception."}
+              {page.heroSubheadline}
             </p>
           </FadeIn>
         </div>
@@ -167,24 +169,33 @@ export default function App(props) {
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <h2 className="text-3xl md:text-5xl lg:text-7xl font-light tracking-tighter leading-[1.1] text-white">
-              {page.philosophyMain || "Sound is the invisible architecture of an experience."} 
-              <span className="text-neutral-600"> {page.philosophyAccent || "We don't just make noise; we build structural audio that defines spaces and shapes emotion."}</span>
+              {page.philosophyMain} 
+              <span className="text-neutral-600"> {page.philosophyAccent}</span>
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-32">
-            <FadeIn delay={100}><h3 className="text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-neutral-800 pb-4">The Approach</h3><p className="text-lg text-neutral-400 font-light leading-relaxed">We analyze the brand ecosystem before recording a single note. Our methodology is rooted in acoustic strategy, ensuring every frequency serves a distinct purpose.</p></FadeIn>
-            <FadeIn delay={300}><h3 className="text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-neutral-800 pb-4">The Execution</h3><p className="text-lg text-neutral-400 font-light leading-relaxed">From high-fidelity spatial mixing to minimalist sonic logos, our production is obsessive. We strip away the unnecessary, leaving only the essential audio elements.</p></FadeIn>
+            <FadeIn delay={100}>
+              <h3 className="text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-neutral-800 pb-4">The Approach</h3>
+              <p className="text-lg text-neutral-400 font-light leading-relaxed">{page.approachText}</p>
+            </FadeIn>
+            <FadeIn delay={300}>
+              <h3 className="text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-neutral-800 pb-4">The Execution</h3>
+              <p className="text-lg text-neutral-400 font-light leading-relaxed">{page.executionText}</p>
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* Capabilities & Footer stay static for now */}
       <section id="capabilities" className="py-32 bg-black border-t border-neutral-900">
         <div className="px-6 md:px-12 lg:px-24 mb-16"><FadeIn><h2 className="text-4xl md:text-6xl tracking-tighter text-white font-medium">Capabilities</h2></FadeIn></div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-neutral-900 border-y border-neutral-900">
-          {[ { title: "Sonic Branding", icon: <Activity size={32} strokeWidth={1} />, desc: "Audio logos, UI sound systems, and holistic brand voice development that creates immediate recognition." }, { title: "Acoustic Strategy", icon: <Layers size={32} strokeWidth={1} />, desc: "Consulting on how audio operates within physical and digital spaces to optimize user experience." }, { title: "High-End Production", icon: <PlayCircle size={32} strokeWidth={1} />, desc: "Bespoke music composition, sound design, and pristine post-production mixing for film and digital media." } ].map((item, i) => (
+          {page.capabilities?.map((item, i) => (
             <div key={i} className="bg-black p-12 md:p-16 lg:p-20 group hover:bg-neutral-950 transition-colors">
-              <FadeIn delay={i * 150}><div className="text-neutral-500 mb-8 group-hover:text-white transition-colors">{item.icon}</div><h3 className="text-2xl font-medium tracking-tight text-white mb-4">{item.title}</h3><p className="text-neutral-500 font-light leading-relaxed">{item.desc}</p></FadeIn>
+              <FadeIn delay={i * 150}>
+                <div className="text-neutral-500 mb-8 group-hover:text-white transition-colors">{getIcon(i)}</div>
+                <h3 className="text-2xl font-medium tracking-tight text-white mb-4">{item.title}</h3>
+                <p className="text-neutral-500 font-light leading-relaxed">{item.description}</p>
+              </FadeIn>
             </div>
           ))}
         </div>
@@ -192,10 +203,15 @@ export default function App(props) {
 
       <footer id="contact" className="bg-black pt-32 pb-12 px-6 md:px-12 lg:px-24 border-t border-neutral-900 text-center md:text-left">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-32">
-          <FadeIn><h2 className="text-5xl md:text-7xl font-medium tracking-tighter text-white mb-8">Let's <br/> resonate.</h2><a href="mailto:hello@overlookaudio.com" className="inline-flex items-center gap-2 text-xl text-neutral-400 hover:text-white border-b border-neutral-800 hover:border-white pb-2 transition-all">hello@overlookaudio.com <ArrowUpRight size={20} /></a></FadeIn>
+          <FadeIn>
+            <h2 className="text-5xl md:text-7xl font-medium tracking-tighter text-white mb-8">Let's <br/> resonate.</h2>
+            <a href={`mailto:${page.contactEmail}`} className="inline-flex items-center gap-2 text-xl text-neutral-400 hover:text-white border-b border-neutral-800 hover:border-white pb-2 transition-all">
+              {page.contactEmail} <ArrowUpRight size={20} />
+            </a>
+          </FadeIn>
           <FadeIn delay={200} className="flex flex-col md:items-end justify-end space-y-4 text-neutral-500 font-light tracking-tight">
-            <a href="#" className="hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+            <a href={page.instagramUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Instagram</a>
+            <a href={page.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
           </FadeIn>
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase text-neutral-700 font-light pt-8 border-t border-neutral-900">
