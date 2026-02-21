@@ -12,7 +12,7 @@ capabilities:
     description: "Consulting on how audio operates within physical and digital spaces to optimize user experience."
   - title: "High-End Production"
     description: "Bespoke music composition, sound design, and pristine post-production mixing for film and digital media."
-contactEmail: "hello@overlookaudio.com"
+contactEmail: "info@overlookaudio.com"
 instagramUrl: "#"
 linkedinUrl: "#"
 ---
