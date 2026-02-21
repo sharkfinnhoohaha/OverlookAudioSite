@@ -1,8 +1,11 @@
 import { defineConfig } from "tinacms";
 
-// These are the only two lines that changed to ensure Vite picks them up
-const branch = "main";
+// Use @ts-ignore to stop the "Property env does not exist" error in your editor
+// @ts-ignore
+const branch = process.env.VITE_TINA_BRANCH || "main";
+// @ts-ignore
 const clientId = import.meta.env.VITE_TINA_CLIENT_ID;
+// @ts-ignore
 const token = import.meta.env.VITE_TINA_TOKEN;
 
 export default defineConfig({
@@ -31,7 +34,6 @@ export default defineConfig({
             type: "string",
             name: "heroHeadline",
             label: "Hero Headline",
-            description: "Supports <br /> for line breaks",
           },
           {
             type: "string",
@@ -77,21 +79,9 @@ export default defineConfig({
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
             ],
           },
-          {
-            type: "string",
-            name: "contactEmail",
-            label: "Contact Email",
-          },
-          {
-            type: "string",
-            name: "instagramUrl",
-            label: "Instagram URL",
-          },
-          {
-            type: "string",
-            name: "linkedinUrl",
-            label: "LinkedIn URL",
-          },
+          { type: "string", name: "contactEmail", label: "Contact Email" },
+          { type: "string", name: "instagramUrl", label: "Instagram URL" },
+          { type: "string", name: "linkedinUrl", label: "LinkedIn URL" },
         ],
       },
     ],
