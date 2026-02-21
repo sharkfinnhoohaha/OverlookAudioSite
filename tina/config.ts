@@ -1,12 +1,9 @@
 import { defineConfig } from "tinacms";
 
-// Use @ts-ignore to stop the "Property env does not exist" error in your editor
-// @ts-ignore
+// We use process.env here because the Tina CLI runs in Node.js
 const branch = process.env.VITE_TINA_BRANCH || "main";
-// @ts-ignore
-const clientId = import.meta.env.VITE_TINA_CLIENT_ID;
-// @ts-ignore
-const token = import.meta.env.VITE_TINA_TOKEN;
+const clientId = process.env.VITE_TINA_CLIENT_ID;
+const token = process.env.VITE_TINA_TOKEN;
 
 export default defineConfig({
   branch,
@@ -30,50 +27,18 @@ export default defineConfig({
         path: "content/pages",
         format: "md",
         fields: [
-          {
-            type: "string",
-            name: "heroHeadline",
-            label: "Hero Headline",
-          },
-          {
-            type: "string",
-            name: "heroSubheadline",
-            label: "Hero Subheadline",
-          },
-          {
-            type: "string",
-            name: "philosophyMain",
-            label: "Philosophy Main Text",
-            ui: { component: "textarea" },
-          },
-          {
-            type: "string",
-            name: "philosophyAccent",
-            label: "Philosophy Accent Text",
-            ui: { component: "textarea" },
-          },
-          {
-            type: "string",
-            name: "approachText",
-            label: "The Approach Description",
-            ui: { component: "textarea" },
-          },
-          {
-            type: "string",
-            name: "executionText",
-            label: "The Execution Description",
-            ui: { component: "textarea" },
-          },
+          { type: "string", name: "heroHeadline", label: "Hero Headline" },
+          { type: "string", name: "heroSubheadline", label: "Hero Subheadline" },
+          { type: "string", name: "philosophyMain", label: "Philosophy Main Text", ui: { component: "textarea" } },
+          { type: "string", name: "philosophyAccent", label: "Philosophy Accent Text", ui: { component: "textarea" } },
+          { type: "string", name: "approachText", label: "The Approach Description", ui: { component: "textarea" } },
+          { type: "string", name: "executionText", label: "The Execution Description", ui: { component: "textarea" } },
           {
             type: "object",
             list: true,
             name: "capabilities",
             label: "Capabilities",
-            ui: {
-              itemProps: (item) => {
-                return { label: item?.title };
-              },
-            },
+            ui: { itemProps: (item) => ({ label: item?.title }) },
             fields: [
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
