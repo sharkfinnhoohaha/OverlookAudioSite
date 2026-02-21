@@ -1,9 +1,14 @@
 import { defineConfig } from "tinacms";
 
+// These are the only two lines that changed to ensure Vite picks them up
+const branch = "main";
+const clientId = import.meta.env.VITE_TINA_CLIENT_ID;
+const token = import.meta.env.VITE_TINA_TOKEN;
+
 export default defineConfig({
-  branch: "main",
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  token: process.env.TINA_TOKEN,
+  branch,
+  clientId,
+  token,
   build: {
     outputFolder: "admin",
     publicFolder: "public",
@@ -22,7 +27,6 @@ export default defineConfig({
         path: "content/pages",
         format: "md",
         fields: [
-          // Hero Section
           {
             type: "string",
             name: "heroHeadline",
@@ -34,7 +38,6 @@ export default defineConfig({
             name: "heroSubheadline",
             label: "Hero Subheadline",
           },
-          // Philosophy Section
           {
             type: "string",
             name: "philosophyMain",
@@ -59,7 +62,6 @@ export default defineConfig({
             label: "The Execution Description",
             ui: { component: "textarea" },
           },
-          // Capabilities Section (Object List)
           {
             type: "object",
             list: true,
@@ -75,7 +77,6 @@ export default defineConfig({
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
             ],
           },
-          // Footer / Contact
           {
             type: "string",
             name: "contactEmail",
