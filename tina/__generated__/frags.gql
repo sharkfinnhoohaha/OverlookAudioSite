@@ -1,0 +1,17 @@
+fragment PageParts on Page {
+  __typename
+  heroHeadline
+  heroSubheadline
+  philosophyMain
+  philosophyAccent
+  approachText
+  executionText
+  capabilities {
+    __typename
+    title
+    description
+  }
+  contactEmail
+  instagramUrl
+  linkedinUrl
+}
