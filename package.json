@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "edit": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"vite\"",
-    "build": "tinacms build --skip-index-checks && vite build",
+    "build": "tinacms build --skip-cloud-checks && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
