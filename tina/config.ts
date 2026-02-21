@@ -1,9 +1,9 @@
 import { defineConfig } from "tinacms";
 
-// We use process.env here because the Tina CLI runs in Node.js
+// This check handles both your local machine and the Vercel build server
 const branch = process.env.VITE_TINA_BRANCH || "main";
-const clientId = process.env.VITE_TINA_CLIENT_ID;
-const token = process.env.VITE_TINA_TOKEN;
+const clientId = process.env.VITE_TINA_CLIENT_ID || "";
+const token = process.env.VITE_TINA_TOKEN || "";
 
 export default defineConfig({
   branch,
