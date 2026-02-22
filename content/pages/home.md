@@ -1,6 +1,6 @@
 ---
-heroHeadline: Hi Dad!
-heroSubheadline: How's it going?
+heroHeadline: 'Undergoing maintenance, check back in a few!'
+heroSubheadline: We all need a holiday...even websites.
 philosophyMain: ''
 approachText: ''
 executionText: ''
