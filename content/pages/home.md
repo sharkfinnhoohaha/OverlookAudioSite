@@ -1,6 +1,6 @@
 ---
-heroHeadline: In development. Check back in a few...
-heroSubheadline: Big things coming
+heroHeadline: Hi Dad!
+heroSubheadline: How's it going?
 philosophyMain: ''
 approachText: ''
 executionText: ''
