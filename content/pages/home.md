@@ -1,7 +1,8 @@
 ---
 heroHeadline: 'Undergoing maintenance, check back in a few!'
 heroSubheadline: We all need a holiday...even websites.
-philosophyMain: ''
+philosophyMain: We love to make music.
+philosophyAccent: 'Overlook Audio is run by musicians, for musicians. '
 approachText: ''
 executionText: ''
 capabilities:
