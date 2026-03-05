@@ -8,8 +8,8 @@ executionText: 'We offer in person services in Southern California, where we par
 capabilities:
   - title: Mixing/Mastering
     description: 'Making sure your music sounds its best, so it can be enjoyed best.'
-  - title: Recording and Music Production
-    description: Check out our catalog! We think our work speaks for itself.
+  - title: Music Production
+    description: 'This is where it all started for us. It’s what we love the most, and believe it’s what we do best! From making a song from an idea, to helping you figure out how to finish that song you have been stuck on for months,'
   - title: Studio Services
     description: 'Wether it’s your first time in the studio, or you are a seasoned pro who just needs to get a few takes down, we partner with a wide range of studios that let us tailor to your exact needs,'
 contactEmail: info@overlookaudio.com
