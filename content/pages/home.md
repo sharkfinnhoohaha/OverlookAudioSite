@@ -1,8 +1,8 @@
 ---
-heroHeadline: 'Undergoing maintenance, check back in a few!'
-heroSubheadline: We all need a holiday...even websites.
-philosophyMain: We love to make music.
-philosophyAccent: 'Overlook Audio is run by musicians, for musicians. '
+heroHeadline: OVERLOOK AUDIO
+heroSubheadline: 'Independently Owner & Operated in Ventura, California.'
+philosophyMain: Obsessed with all things sound.
+philosophyAccent: 'Overlook Audio is run by musicians, who accidentally learned they love audio engineering after having to learn to record themselves because…they were to broke'
 approachText: 'From unconventional portable recording setups that provide artists the flexibility to record anywhere they want, to mixing and mastering services by experienced professionals. We copy and paste our drum samples, but not our approach. We tailor everything we do to your individual needs.'
 executionText: 'We offer in person services in Southern California, where we partner with a diverse set of studios for recording and production sessions. Can’t make it to SoCal? No problem! Remote production, mixing, and mastering services are also available.'
 capabilities:
