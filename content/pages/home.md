@@ -2,9 +2,14 @@
 heroHeadline: OVERLOOK AUDIO
 heroSubheadline: Obsessed with all things sound.
 philosophyMain: 'Independently Owned & Operated in Ventura, California.'
-philosophyAccent: 'We like to look past the horizon. Anything is possible. '
+philosophyAccent: |2-
+     We like to look past the horizon. 
+     Anything is possible. 
 approachText: 'From unconventional portable recording setups that provide artists the flexibility to record anywhere they want, to mixing and mastering services by experienced professionals. We copy and paste our drum samples, but not our approach. We tailor everything we do to your individual needs.'
-executionText: 'We offer in person services in Southern California, where we partner with a diverse set of studios for recording and production sessions. Can’t make it to SoCal? No problem! Remote production, mixing, and mastering services are also available.'
+executionText: |-
+  We offer in person services in Southern California, where we partner with a diverse set of studios for recording and production sessions. 
+  Can’t make it to SoCal?   No problem!
+  Remote production, mixing, and mastering services are also available.
 capabilities:
   - title: Mixing/Mastering
     description: 'Making sure your music sounds its best, so it can be enjoyed best.'
